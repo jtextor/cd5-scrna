@@ -15,9 +15,11 @@ source("scripts/prepare-umaps.R")
 # This script plots the UMAPS.
 source("scripts/plot-umaps.R")
 
-
 # This script prepares data for a plot of expression levels and percentages.
 source("scripts/prepare-expression.R")
 # And this script performs the actual plot.
 source("scripts/plot-expression.R")
 
+# Finally, this code executes the vignette that describes our data preprocessing
+# strategy.
+rmarkdown::render("vignettes/qc.Rmd")

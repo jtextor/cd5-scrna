@@ -3,7 +3,7 @@ load("tmp/expression.Rdata")
 source("scripts/tools.R")
 library( plotfunctions )
 
-pdf("plots/expr.pdf", width=14, height=2)
+pdf("plots/expression.pdf", width=14, height=2)
 
 par( mar=c(0,0,.2,.2), xaxt="n", yaxt="n", mgp=c(.8,0,0) )
 

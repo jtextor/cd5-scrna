@@ -1,0 +1,80 @@
+---
+title: "CD5 T cells scRNA analysis: quality control"
+author: "Johannes Textor"
+date: "`r Sys.Date()`"
+output: pdf_document 
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+# Data preparation
+
+We first load in a file that contains all the data from all 3 plates for each experiment.
+
+```{r}
+scrna.data <- read.csv(gzfile("../data/cd5-scrna.csv.gz"),row.names=1)
+X <- scrna.data[-c(1,2),]
+
+# Plate numbers are the numbers after the dot in the column name
+plate <- as.integer(gsub(".*\\.","",colnames(X)))
+# Wells are listed row-wise, e.g., cell X024.3 is A24 on plate 3
+# and cell X025.3 is B1 on plate 3
+column <- rep(rep(1:24,16),max(plate))
+# These rows contain the spike-in RNA
+spikeins <- grep("^ERCC-", rownames(X))
+
+```
+
+# Exploration of read counts
+
+We now first plot simply the reads per well, separately for the spikein and 
+non-spikein RNA. We color the plot per plate.
+
+```{r}
+par( mfrow=c(1,2), xaxt="n", font.main=1, cex.main=1, pch=19, cex=.5, bty='l' )
+plot( colSums( X[spikeins,] ), col=plate, log="y", 
+	main="Spike-in RNA", xlab="",
+	ylab="transcripts", cex=.5 )
+legend("bottomright", as.character(1:3), title="plate", col=1:3, pch=19)
+plot( colSums( X[-spikeins,] ), col=plate, log="y", main="Non-Spikein RNA",
+	ylab="transcripts", xlab="", cex=.5 )
+```
+
+Here we can already see massive variation between the RNA load. Because the
+systematic variation on the second half of plate 1 and the first half of plate
+2 affects only the spike-in but not the non-spikein RNA, this is likely 
+to reflect a problem with alignment between the sorter and the well plate. 
+Unfortunately such problems are quite common.
+
+# Unsupervised clustering to gate out bad wells
+
+Instead of the read counts only, we now perform a UMAP clustering of the data.
+Given the clear technical artifacts, we would expect the poor quality cells to
+show up as a separate cluster so we can gate them out easily. We seed the UMAP
+so we can reproduce its result.
+
+```{r}
+x <- X[-spikeins,]
+x <- log2(.5+x)
+set.seed(123)
+xu <- uwot:::umap(t(x), pca=100, metric="euclidean",
+	n_neighbors=15, n_threads=4)
+
+
+plot(xu, col=1+(colSums(X)>2000), pch=19, cex=.5)
+
+legend( "topleft", c("<=2000 reads",">2000 reads"), col=1:2, pch=19 )
+# Plot hand-drawn gate on top
+load( "../data/qc-passed.Rdata")
+lines(gate,col=2)
+```
+
+As we can see, the two large clusters indeed overlap largely with a cutoff
+on the number of reads of about 2000. There is also a small cluster "in the middle"
+consisting largely of low-read cells. The hand-drawn gate includes the cells that 
+we want to use for continuation of the analysis. 
+
+
+
