@@ -23,17 +23,18 @@ plate <- rep(seq_along(all.plates),each=384)
 scrna.data <- Reduce( cbind, ext.plates )
 colnames(scrna.data) <- paste0(colnames(scrna.data),".",plate)
 
+
+load("data/qc-passed.Rdata")
 qc.df <- do.call( data.frame, as.list(rep(0,ncol(scrna.data))) )
 colnames(qc.df) <- colnames(scrna.data)
 rownames(qc.df) <- "qc.passed"
 qc.df[,qc.passed] <- 1
 
+load("data/cd5-levels.Rdata")
 cd5.df <- do.call( data.frame, as.list( cd5.levels ) )
 colnames(cd5.df) <- colnames(scrna.data)
 rownames(cd5.df) <- "cd5.level"
 
 scrna.data <- rbind( qc.df, cd5.df, scrna.data )
 
-save(scrna.data, file="tmp/merged.Rdata")
-
-write.csv( scrna.data, "data/cd5-scrna.csv" )
+write.csv( scrna.data, gzfile("data/cd5-scrna.csv.gz") )
