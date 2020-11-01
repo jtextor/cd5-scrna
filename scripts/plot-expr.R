@@ -87,5 +87,5 @@ dd <- cbind(gene=rownames(dd),dd)
 
 library(writexl)
 
-write_xlsx(dd, "data/gene-expressions.xlsx")
+write_xlsx(dd, "tmp/gene-expressions.xlsx")
 
