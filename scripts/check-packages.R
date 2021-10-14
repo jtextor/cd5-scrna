@@ -1,6 +1,6 @@
 
 bioconductor.packages <- c("SingleCellExperiment", "scran", "scater")
-r.packages <- c("plotfunctions", "readxl", "writexl", "uwot",
+r.packages <- c("plotfunctions", "readxl", "writexl", "uwot", "ellipse",
 	"RColorBrewer", "ggplot2", "cowplot" )
 
 cat("Checking availability of required R and Bioconductor packages:\n")
