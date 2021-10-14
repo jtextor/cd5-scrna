@@ -12,7 +12,7 @@
 
 # We provide a script to automatically install needed packages. Uncomment and run
 # this if you want to use it.
-source("scripts/package-check.R")
+source("scripts/check-packages.R")
 
 
 
