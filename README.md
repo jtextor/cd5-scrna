@@ -28,6 +28,7 @@ R (4.0.4):
  * ggplot2 (3.3.3)
  * cowplot (1.1.1)
  * uwot (0.1.10)
+ * ellipse (0.4.2)
 
 Bioconductor (3.12):
  * SingleCellExperiment (1.12.0)
