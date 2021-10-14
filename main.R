@@ -40,6 +40,9 @@ source("scripts/plot-umaps.R")
 
 
 
-# Finally, this code executes the vignette that describes our data preprocessing
+# OPTIONAL: this code executes the vignette that describes our data preprocessing
 # strategy.
-rmarkdown::render("vignettes/qc.Rmd")
+# Compiling this vignette requires some tools on your system, such as pandoc and latex.
+# If you don't have these, the vignette can fail. In that case, you can install the 
+# 'tinytex' package (https://yihui.org/tinytex/)
+# rmarkdown::render("vignettes/qc.Rmd")

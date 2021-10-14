@@ -1,4 +1,3 @@
-latex.packages <- c("tinytex")
 bioconductor.packages <- c("SingleCellExperiment", "scran", "scater")
 r.packages <- c("plotfunctions", "readxl", "writexl", "uwot", "ellipse",
                 "RColorBrewer", "ggplot2", "cowplot" )
@@ -38,8 +37,6 @@ if( length(unavailable.packages) > 0 ){
           install.packages("BiocManager")
         }
         BiocManager::install( p )
-      } else if(p %in% latex.packages){
-        tinytex::install_tinytex()
       } else {
         install.packages( p )
       }

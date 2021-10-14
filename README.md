@@ -16,7 +16,8 @@ If you want to re-create our figures, use the script
 
 We performed a quality control step to exclude poor wells from our analysis. 
 The vignette  [qc.Rmd](vignettes/qc.Rmd) explains how this quality
-control was done.
+control was done. To compile the vignette, you will need to have pandoc and latex
+installed on your system; if you don't, you can try to use [tinytex](https://yihui.org/tinytex/).
 
 You will need to have the following R and Bioconductor packages installed to run everything. We give the package versions we used for conducting the analyses. You can use the provided script [check-packages.R](scripts/check-packages.R) to install these packages.
 
