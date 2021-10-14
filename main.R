@@ -10,15 +10,35 @@
 
 # source("scripts/prepare-data.R")
 
-# This script computes the UMAP embeddings of the single-cell data.
-source("scripts/prepare-umaps.R")
-# This script plots the UMAPS.
-source("scripts/plot-umaps.R")
+# We provide a script to automatically install needed packages. Uncomment and run
+# this if you want to use it.
+source("scripts/package-check.R")
+
+
+
+
+# This script prepares data for the analyses conducted in Figure 1 of the paper.
+source("scripts/convert-to-sce-format.R")
+source("scripts/plot-figure-1.R")
+
+
+
 
 # This script prepares data for a plot of expression levels and percentages.
 source("scripts/prepare-expression.R")
 # And this script performs the actual plot.
 source("scripts/plot-expression.R")
+
+
+
+
+# This script computes the UMAP embeddings of the single-cell data.
+source("scripts/prepare-umaps.R")
+# This script plots the UMAPS.
+source("scripts/plot-umaps.R")
+
+
+
 
 # Finally, this code executes the vignette that describes our data preprocessing
 # strategy.
