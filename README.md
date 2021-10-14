@@ -27,6 +27,7 @@ R (4.0.4):
  * RColorBrewer (1.1.2)
  * ggplot2 (3.3.3)
  * cowplot (1.1.1)
+ * uwot (0.1.10)
 
 Bioconductor (3.12):
  * SingleCellExperiment (1.12.0)
