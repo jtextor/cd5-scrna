@@ -4,8 +4,8 @@
 FIGURES_IN_PAPER=plots/figure-1.pdf plots/expression.pdf
 EXTRA_FIGURES=plots/umaps.pdf
 PLATE_FILES=RMC-JB-001_AH22TCBGX9_S1_R2.TranscriptCounts.tsv.gz \
-	RMC-JB-002_AH22TCBGX9_S1_R2.TranscriptCounts.tsv.gz \
-	RMC-JB-003_AH22TCBGX9_S1_R2.TranscriptCounts.tsv.gz
+	RMC-JB-002_AH22TCBGX9_S2_R2.TranscriptCounts.tsv.gz \
+	RMC-JB-003_AH22TCBGX9_S3_R2.TranscriptCounts.tsv.gz
 
 all : $(FIGURES_IN_PAPER) $(EXTRA_FIGURES)
 
