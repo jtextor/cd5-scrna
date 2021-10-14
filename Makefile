@@ -2,7 +2,7 @@
 .DELETE_ON_ERROR:
 
 FIGURES_IN_PAPER=plots/figure-1.pdf plots/expression.pdf
-EXTRA_FIGURES=plots/umaps.pdf vignettes/qc.pdf
+EXTRA_FIGURES=plots/umaps.pdf
 PLATE_FILES=RMC-JB-001_AH22TCBGX9_S1_R2.TranscriptCounts.tsv.gz \
 	RMC-JB-002_AH22TCBGX9_S1_R2.TranscriptCounts.tsv.gz \
 	RMC-JB-003_AH22TCBGX9_S1_R2.TranscriptCounts.tsv.gz
@@ -27,6 +27,7 @@ tmp/expression.Rdata : scripts/prepare-expression.R data/cd5-scrna.csv.gz tmp/pa
 tmp/sce.rds : scripts/convert-to-sce-format.R data/cd5-scrna.csv.gz tmp/packages-checked.txt
 	Rscript scripts/convert-to-sce-format.R
 
+# For information, how the vignette can be compiled
 vignettes/qc.pdf : vignettes/qc.Rmd data/cd5-scrna.csv.gz tmp/packages-checked.txt
 	Rscript -e "rmarkdown::render('vignettes/qc.Rmd')"
 
