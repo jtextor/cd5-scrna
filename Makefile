@@ -16,16 +16,22 @@ plots/expression.pdf : scripts/plot-expression.R tmp/expression.Rdata tmp/packag
 	Rscript scripts/plot-expression.R
 
 plots/umaps.pdf : scripts/plot-umaps.R tmp/umaps.Rdata tmp/packages-checked.txt
-	Rscript scripts/plot-expression.R
+	Rscript scripts/plot-umaps.R
 
-tmp/umaps.Rdata : scripts/prepare-umaps.R data/dakota-dge.csv.gz data/cd5-scrna.csv.gz
+tmp/umaps.Rdata : scripts/prepare-umaps.R data/dakota-dge.csv.gz data/cd5-scrna.csv.gz tmp/packages-checked.txt
 	Rscript scripts/prepare-umaps.R
 
-tmp/sce.rds : scripts/convert-to-sce-format.R data/cd5-scrna.csv.gz
+tmp/expression.Rdata : scripts/prepare-expression.R data/cd5-scrna.csv.gz tmp/packages-checked.txt
+	Rscript scripts/prepare-expression.R
+
+tmp/sce.rds : scripts/convert-to-sce-format.R data/cd5-scrna.csv.gz tmp/packages-checked.txt
 	Rscript scripts/convert-to-sce-format.R
 
-vignettes/qc.pdf : vignettes/qc.Rmd data/cd5-scrna.csv.gz
+vignettes/qc.pdf : vignettes/qc.Rmd data/cd5-scrna.csv.gz tmp/packages-checked.txt
 	Rscript -e "rmarkdown::render('vignettes/qc.Rmd')"
+
+tmp/packages-checked.txt : scripts/check-packages.R
+	Rscript scripts/check-packages.R
 
 ## For information, this is how the joint count files was generated from the 
 ## individual plates, the quality control selection, and the CD5 levels for each cell.
