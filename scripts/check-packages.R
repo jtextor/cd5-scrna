@@ -31,7 +31,7 @@ if( length(unavailable.packages) > 0 ){
 		cat("OK, please install these packages yourself and run the script again!\n")
 		quit( status=1, save="no" ) 
 	} else {
-		chooseCRANmirror( graphics=FALSE )
+		options( repos="https://cloud.r-project.org" )
 		for( p in unavailable.packages ){
 			if( p %in% bioconductor.packages ){
 				if( !requireNamespace("BiocManager", quietly = TRUE) ){
